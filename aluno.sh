@@ -1,5 +1,4 @@
 #!/bin/bash
-#grep -oP 'LCC3-$i.*?class="coluna"' index.html | grep  -o '<b> Usuário(s) logado(s).*<br>' novo.html | grep -oP '<br>.*<br>' | tr -d '<br>'
 
 
 #Mr-76 A.K.A Careca
@@ -19,6 +18,8 @@ reengString=""
 
 wget --no-check-certificate https://lcc.ufcg.edu.br/
 
+#grep -oP 'LCC3-017.*?class="coluna"' index.html | grep -oP '<b>LCC3-017 -.*N' | grep -oP '\- .*' | tr -d "-"
+
 lccFind(){
 
 	
@@ -32,6 +33,15 @@ do
 		sed 's/<br>//g'
 	)
 
+
+	isDOWN=$(grep -oP 'LCC3-017.*?class="coluna"' index.html | grep -oP '<b>LCC3-017 -.*N' | grep -oP '\- .*' | tr -d "-" | tr -d " ")
+
+	
+	if [ "$isDOWN" == "DOWN" ];then
+		echo "maquina $i is DOWN"
+		continue
+	fi
+
 	if [ "$Aluno" == "" ]; then
 
 		echo "maquina $1-$i com ninguem "
@@ -40,8 +50,6 @@ do
 
 	echo "maquina Lcc3-$i com aluno $Aluno"
 done
-
-
 
 }
 
