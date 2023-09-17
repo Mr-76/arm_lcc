@@ -1,0 +1,1 @@
+ grep -oP 'LCC3-017.*?class="coluna"' index.html
