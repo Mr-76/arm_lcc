@@ -57,8 +57,4 @@ done
 lccFind $lcc3String $nlcc3
 lccFind $lcc2String $nlcc2andlcc1
 lccFind $lcc1String $nlcc2andlcc1
-
-
-
-
-
+rm index.html
