@@ -34,7 +34,8 @@ do
 	)
 
 
-	isDOWN=$(grep -oP 'LCC3-017.*?class="coluna"' index.html | grep -oP '<b>LCC3-017 -.*N' | grep -oP '\- .*' | tr -d "-" | tr -d " ")
+	
+	isDOWN=$(grep -oP "$1-$i.*?class=\"coluna\"" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
 
 	
 	if [ "$isDOWN" == "DOWN" ];then
