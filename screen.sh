@@ -29,17 +29,30 @@ isNotDownWithNoAluno=0
 echo "<=====================================================$1===============================================>"
 for i in $(seq -w 01 $2)
 do
-	Aluno=$(grep -oP "$1-$i.*?class=\"coluna\"" index.html |
+
+
+	if [[ "$1" == "LCC2" || "$1" == "LCC1" ]];then
+		noleading0=$(expr $i + 0)
+		echo "valor agora eh $noleading0"
+		if [ "$i" -gt 10 ]; then
+			i=$noleading0
+		fi
+	fi
+
+
+	Aluno=$(grep -oP "<b>$1-$i.*?</b><br><br>" index.html |
 		grep -o '<b> Usuário(s) logado(s).*<br>' |
 		grep -oP '<br>.*<br>'|
 		sed 's/<br>//g'
 	)
 
-	echo "maquinas down $isDownN"
-	echo "maquinas normais $isNotDownWithAluno"
-	echo "maquinas nenhum aluno $isNotDownWithNoAluno"
 
-	isDOWN=$(grep -oP "$1-$i.*?class=\"coluna\"" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
+
+#	echo "maquinas down $isDownN"
+#	echo "maquinas normais $isNotDownWithAluno"
+#	echo "maquinas nenhum aluno $isNotDownWithNoAluno"
+
+	isDOWN=$(grep -oP "<b>$1-$i.*?</b><br><br>" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
 
 	
 	if [ "$isDOWN" == "DOWN" ];then

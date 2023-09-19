@@ -19,15 +19,26 @@ reengString=""
 wget --no-check-certificate https://lcc.ufcg.edu.br/
 
 #grep -oP 'LCC3-017.*?class="coluna"' index.html | grep -oP '<b>LCC3-017 -.*N' | grep -oP '\- .*' | tr -d "-"
+#Fix  grep -P "<b>LCC3-017.*?<br>" index.html
+#012 exemplo nao eh class acoluna mas sim class linha
 
-lccFind(){
+lccfind3(){
 
-	
 echo "<=====================================================$1===============================================>"
+
+
 for i in $(seq -w 2 1 $2)
 do
 
-	Aluno=$(grep -oP "$1-$i.*?class=\"coluna\"" /home/solomonKANE/git/arm_lcc/index.html |
+	if [[ "$1" == "LCC2" || "$1" == "LCC1" ]];then
+		noleading0=$(expr $i + 0)
+		echo "valor agora eh $noleading0"
+		if [ "$i" -gt 10 ]; then
+			i=$noleading0
+		fi
+	fi
+
+	Aluno=$(grep -oP "<b>$1-$i.*?</b><br><br>" /home/solomonKANE/git/arm_lcc/index.html |
 		grep -o '<b> Usuário(s) logado(s).*<br>' |
 		grep -oP '<br>.*<br>'|
 		sed 's/<br>//g'
@@ -35,7 +46,7 @@ do
 
 
 	
-	isDOWN=$(grep -oP "$1-$i.*?class=\"coluna\"" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
+	isDOWN=$(grep -oP "<b>$1-$i.*?</b><br><br>" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
 
 	
 	if [ "$isDOWN" == "DOWN" ];then
@@ -55,7 +66,7 @@ done
 }
 
 
-lccFind $lcc3String $nlcc3
-lccFind $lcc2String $nlcc2andlcc1
-lccFind $lcc1String $nlcc2andlcc1
+lccfind3 $lcc3String $nlcc3
+lccfind3 $lcc2String $nlcc2andlcc1
+lccfind3 $lcc1String $nlcc2andlcc1
 rm index.html
