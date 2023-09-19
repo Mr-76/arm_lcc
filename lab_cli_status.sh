@@ -14,7 +14,6 @@ lccFind(){
 	isDownN=0
 	isNotDownWithAluno=0
 	isNotDownWithNoAluno=0
-	GREEN='\033[0;32m'
 
 
 		
