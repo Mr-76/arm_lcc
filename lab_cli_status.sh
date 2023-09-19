@@ -21,12 +21,12 @@ lccFind(){
 	echo "<===========================================================================$1===========================================================================>"
 	for i in $(seq -w 01 $2)
 	do
-		Aluno=$(grep -oP "$1-$i.*?class=\"coluna\"" index.html |
+		Aluno=$(grep -oP "<b>$1-$i.*?</b><br><br>" index.html |
 			grep -o '<b> Usuário(s) logado(s).*<br>' |
 			grep -oP '<br>.*<br>'|
 			sed 's/<br>//g'
 		)
-		isDOWN=$(grep -oP "$1-$i.*?class=\"coluna\"" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
+		isDOWN=$(grep -oP "<b>$1-$i.*?</b><br><br>" index.html | grep -oP "<b>$1-$i -.*N" | grep -oP '\- .*' | tr -d "-" | tr -d " ")
 
 		
 		if [ "$isDOWN" == "DOWN" ];then
