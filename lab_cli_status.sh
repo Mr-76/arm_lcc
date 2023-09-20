@@ -1,6 +1,8 @@
 #!/bin/bash
 lccFind(){
 
+
+	wget -q --no-check-certificate https://lcc.ufcg.edu.br/
 	index_value=0
 
 	#Build list 120 maquians
@@ -12,8 +14,8 @@ lccFind(){
 
 
 	isDownN=0
-	isNotDownWithAluno=0
-	isNotDownWithNoAluno=0
+	comAluno=0
+	upSemAluno=0
 
 
 		
@@ -30,13 +32,13 @@ lccFind(){
 		
 		if [ "$isDOWN" == "DOWN" ];then
 			isDownN=$((isDownN + 1))
-			machines[index_value]="${machines[index_value]}D"
+			machines[index_value]="${machines[index_value]}X"
 		elif [ "$Aluno" == "" ] ;then
-			isNotDownWithNoAluno=$((isNotDownWithNoAluno + 1))
-			machines[index_value]="${machines[index_value]}O"
+			upSemAluno=$((upSemAluno + 1))
+			machines[index_value]="${machines[index_value]}N"
 		else
-			isNotDownWithAluno=$((isNotDownWithAluno + 1))
-			machines[index_value]="${machines[index_value]}U"
+			comAluno=$((comAluno + 1))
+			machines[index_value]="${machines[index_value]}A"
 			
 		fi
 
@@ -77,12 +79,13 @@ lccFind(){
 	done
 
 		echo "maquinas down $isDownN"
-		echo "maquinas normais $isNotDownWithAluno"
-		echo "maquinas nenhum aluno $isNotDownWithNoAluno"
+		echo "maquinas com Aluno $comAluno"
+		echo "maquinas nenhum aluno $upSemAluno"
+		echo -e "N --->Nenhum aluno\nX--->Down\nA--->Com aluno"
+
+	rm index.html
 }
 
 nlcc3=120
 lcc3String="LCC3"
-wget --no-check-certificate https://lcc.ufcg.edu.br/
 lccFind $lcc3String $nlcc3
-rm index.html

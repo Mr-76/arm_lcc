@@ -43,21 +43,17 @@ lccfind3(){
 		
 		if [ "$isDOWN" == "DOWN" ];then
 			isDownN=$((isDownN + 1))
-			machines[index_value]="${machines[index_value]}D"
 		elif [ "$Aluno" == "" ] ;then
 			isNotDownWithNoAluno=$((isNotDownWithNoAluno + 1))
-			machines[index_value]="${machines[index_value]}O"
 		else
 			isNotDownWithAluno=$((isNotDownWithAluno + 1))
-			machines[index_value]="${machines[index_value]}U"
-			
 		fi
 
 		index_value=$((index_value+1))
 
 	done
 	echo "maquinas down $isDownN"
-	echo "maquinas normais $isNotDownWithAluno"
+	echo "maquinas Com aluno $isNotDownWithAluno"
 	echo "maquinas nenhum aluno $isNotDownWithNoAluno"
 }
 
