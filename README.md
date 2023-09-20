@@ -1,0 +1,2 @@
+Exemple usage
+![](using.gif)
