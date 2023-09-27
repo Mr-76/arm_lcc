@@ -5,6 +5,13 @@
 
 lccFind(){
 
+
+	RED="\e[31m"
+	GREEN="\e[32m"
+	YELLOW="\e[33m"
+	END="\e[0m"
+
+
 	wget -q --no-check-certificate https://lcc.ufcg.edu.br/
 
 	local machines=() # need to make it empty every time ..... try without to see it .....
@@ -37,13 +44,13 @@ lccFind(){
 		
 		if [ "$isDOWN" == "DOWN" ];then
 			isDownN=$((isDownN + 1))
-			machines[index_value]="${machines[index_value]}X"
+			machines[index_value]="${RED}${machines[index_value]}X${END}"
 		elif [ "$Aluno" == "" ] ;then
 			upSemAluno=$((upSemAluno + 1))
-			machines[index_value]="${machines[index_value]}N"
+			machines[index_value]="${YELLOW}${machines[index_value]}N${END}"
 		else
 			comAluno=$((comAluno + 1))
-			machines[index_value]="${machines[index_value]}A"
+			machines[index_value]="${GREEN}${machines[index_value]}A${END}"
 			
 		fi
 
@@ -60,7 +67,7 @@ lccFind(){
 		right_one=$((right - incremento))
 		echo " _______      ______   ______      ______"
 		echo "|      |      |    |   |    |      |    |"
-		echo "|${machines[left]}  |      |${machines[lef_one]}|   |${machines[right_one]}|      |${machines[right]}|"
+		echo -e "|${machines[left]}  |      |${machines[lef_one]}|   |${machines[right_one]}|      |${machines[right]}|"
 		echo "'''''''       ''''''   ''''''      ''''''"
 		incremento=$((incremento + 2))
 		left=$((left - 1))

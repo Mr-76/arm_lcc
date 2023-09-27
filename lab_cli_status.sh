@@ -1,6 +1,11 @@
 #!/bin/bash
 lccFind(){
 
+	RED="\e[31m"
+	GREEN="\e[32m"
+	YELLOW="\e[33m"
+	END="\e[0m"
+
 
 	wget -q --no-check-certificate https://lcc.ufcg.edu.br/
 	index_value=0
@@ -32,13 +37,13 @@ lccFind(){
 		
 		if [ "$isDOWN" == "DOWN" ];then
 			isDownN=$((isDownN + 1))
-			machines[index_value]="${machines[index_value]}X"
+			machines[index_value]="${RED}${machines[index_value]}X${END}"
 		elif [ "$Aluno" == "" ] ;then
 			upSemAluno=$((upSemAluno + 1))
-			machines[index_value]="${machines[index_value]}N"
+			machines[index_value]="${YELLOW}${machines[index_value]}N${END}"
 		else
 			comAluno=$((comAluno + 1))
-			machines[index_value]="${machines[index_value]}A"
+			machines[index_value]="${GREEN}${machines[index_value]}A${END}"
 			
 		fi
 
@@ -63,14 +68,14 @@ lccFind(){
 			final=$((j+11))
 			echo " _______      ______      ______      ______      ______      ______		      ______      ______      ______      ______      ______      ______"
 			echo "|      |      |    |      |    |      |    |      |    |      |    |      	      |    |      |    |      |    |      |    |      |    |      |    |"
-			echo "|${machines[j]}  |      |${machines[j+1]}|      |${machines[j+2]}|      |${machines[j+3]}|      |${machines[j+4]}|      |${machines[j+5]}|		      |${machines[j+6]}|      |${machines[j+7]}|      |${machines[j+8]}|      |${machines[j+9]}|      |${machines[j+10]}|      |${machines[final]}|"
+			echo -e "|${machines[j]}  |      |${machines[j+1]}|      |${machines[j+2]}|      |${machines[j+3]}|      |${machines[j+4]}|      |${machines[j+5]}|		      |${machines[j+6]}|      |${machines[j+7]}|      |${machines[j+8]}|      |${machines[j+9]}|      |${machines[j+10]}|      |${machines[final]}|"
 			echo "'''''''       ''''''      ''''''      ''''''      ''''''      ''''''		      ''''''      ''''''      ''''''      ''''''      ''''''      ''''''"
 			j=$((final - 12))
 		else
 			final=$((j-11))
 			echo " _______      ______      ______      ______      ______      ______		      ______      ______      ______      ______      ______      ______"
 			echo "|      |      |    |      |    |      |    |      |    |      |    |      	      |    |      |    |      |    |      |    |      |    |      |    |"
-			echo "|${machines[j]}  |      |${machines[j-1]}|      |${machines[j-2]}|      |${machines[j-3]}|      |${machines[j-4]}|      |${machines[j-5]}|		      |${machines[j-6]}|      |${machines[j-7]}|      |${machines[j-8]}|      |${machines[j-9]}|      |${machines[j-10]}|      |${machines[final]}|"
+			echo -e "|${machines[j]}  |      |${machines[j-1]}|      |${machines[j-2]}|      |${machines[j-3]}|      |${machines[j-4]}|      |${machines[j-5]}|		      |${machines[j-6]}|      |${machines[j-7]}|      |${machines[j-8]}|      |${machines[j-9]}|      |${machines[j-10]}|      |${machines[final]}|"
 			echo "'''''''       ''''''      ''''''      ''''''      ''''''      ''''''		      ''''''      ''''''      ''''''      ''''''      ''''''      ''''''"
 			j=$((final - 12))
 		fi
