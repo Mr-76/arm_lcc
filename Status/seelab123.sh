@@ -65,10 +65,10 @@ lccFind(){
 	for i in $(seq 1 1 14); do
 		lef_one=$((left + incremento))
 		right_one=$((right - incremento))
-		echo " _______      ______   ______      ______"
-		echo "|      |      |    |   |    |      |    |"
-		echo -e "|${machines[left]}  |      |${machines[lef_one]}|   |${machines[right_one]}|      |${machines[right]}|"
-		echo "'''''''       ''''''   ''''''      ''''''"
+		echo "______        ______   ______      ______"
+		echo "|    |        |    |   |    |      |    |"
+		echo -e "|${machines[left]}|        |${machines[lef_one]}|   |${machines[right_one]}|      |${machines[right]}|"
+		echo "''''''        ''''''   ''''''      ''''''"
 		incremento=$((incremento + 2))
 		left=$((left - 1))
 		right=$((right + 1))
